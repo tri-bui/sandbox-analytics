@@ -1,16 +1,16 @@
 ### Dependencies and Data ###
 
 # Libraries
-install.packages('jsonlite') # install lib
+# install.packages('jsonlite') # install lib
 library(jsonlite) # import lib
 
 # Read in CSV file (df 1)
-demo_csv <- read.csv(file = 'data/demo.csv',
+demo_csv <- read.csv(file = 'demo/data/demo.csv',
                  check.names = F,
                  stringsAsFactors = F)
 
 # Read in JSON file (df 2)
-demo_json <- fromJSON(txt = 'data/demo.json')
+demo_json <- fromJSON(txt = 'demo/data/demo.json')
 
 
 ### Selecting Data ###
