@@ -8,7 +8,7 @@ library(jsonlite)
 # Read in CSV files
 demo_csv <- read.csv(file = 'demo/data/demo.csv',
                      stringsAsFactors = F)
-demo2_csv <- read.csv(file = 'demo/data/demo2.csv',
+demo_wide <- read.csv(file = 'demo/data/demo2.csv',
                      stringsAsFactors = F)
 
 # Read in JSON file
@@ -29,4 +29,16 @@ cond_agg <- demo_json %>%
                         avg_price = mean(price), 
                         min_mileage = min(odometer))
 
+# Melt a wide dataframe into a long one
+long_demo <- gather(demo_wide, key = 'Metric', value = 'Score',
+                    2:ncol(demo_wide))
 
+# Unstack the long df back into a wide one (using piping)
+wide_demo <- long_demo %>% spread(key = 'Metric', 
+                                  value = 'Score', 
+                                  fill = 0)
+
+# Check if the unstacked df equals the original imported one
+# Optionally sort the columns for both dfs before the check
+print(all.equal(demo_wide[, order(colnames(demo_wide))], 
+                wide_demo[, order(colnames(wide_demo))]))
