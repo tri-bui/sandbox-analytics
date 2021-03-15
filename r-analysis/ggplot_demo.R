@@ -76,3 +76,24 @@ box2 + geom_boxplot() +
             y = 'Highway Fuel Economy (MPG)') + 
        theme(axis.text.x = element_text(angle = 45, 
                                         hjust = 1))
+
+
+### Heatmaps ###
+
+# Calculate the highway MPG grouped by manufacturer and year
+grouped_mpg <- mpg_data %>% 
+                 group_by(manufacturer, year) %>%
+                 summarize(mean_hwy = mean(hwy), 
+                           .groups = 'keep')
+
+# Heatmap
+heat1 <- ggplot(grouped_mpg, aes(x = manufacturer, 
+                                 y = factor(year), 
+                                 fill = mean_hwy))
+heat1 + geom_tile() + 
+        labs(title = 'MPG by Manufacturer and Year', 
+             x = 'Manufacturer', y = 'Year', 
+             fill = 'Highway MPG') + 
+        theme(axis.text.x = element_text(angle = 90, 
+                                         hjust = 1, 
+                                         vjust = 0.5))
