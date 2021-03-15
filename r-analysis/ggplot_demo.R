@@ -59,3 +59,20 @@ scatter1 + geom_point(alpha = 0.8) +
                 size = 'City MPG', 
                 color = 'Vehicle Class')
 
+
+### Box plots ###
+
+# Single box plot
+box1 <- ggplot(mpg_data, aes(y = hwys))
+box1 + geom_boxplot(color = 'red', linetype = 'dashed') + 
+       labs(title = 'Highway MPG', 
+            y = 'Highway Fuel Economy (MPG)')
+
+# Grouped box plots
+box2 <- ggplot(mpg_data, aes(x = manufacturer, y = hwy))
+box2 + geom_boxplot() + 
+       labs(title = 'Highway MPG by Mannufacturer', 
+            x = 'Manufacturer', 
+            y = 'Highway Fuel Economy (MPG)') + 
+       theme(axis.text.x = element_text(angle = 45, 
+                                        hjust = 1))
