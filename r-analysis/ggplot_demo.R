@@ -63,14 +63,14 @@ scatter1 + geom_point(alpha = 0.8) +
 ### Box plots ###
 
 # Single box plot
-box1 <- ggplot(mpg_data, aes(y = hwys))
+box1 <- ggplot(mpg_data, aes(y = hwy))
 box1 + geom_boxplot(color = 'red', linetype = 'dashed') + 
        labs(title = 'Highway MPG', 
             y = 'Highway Fuel Economy (MPG)')
 
-# Grouped box plots
+# Grouped box plots with points
 box2 <- ggplot(mpg_data, aes(x = manufacturer, y = hwy))
-box2 + geom_boxplot() + 
+box2 + geom_boxplot() + geom_point() + 
        labs(title = 'Highway MPG by Mannufacturer', 
             x = 'Manufacturer', 
             y = 'Highway Fuel Economy (MPG)') + 
@@ -95,5 +95,55 @@ heat1 + geom_tile() +
              x = 'Manufacturer', y = 'Year', 
              fill = 'Highway MPG') + 
         theme(axis.text.x = element_text(angle = 90, 
+                                         hjust = 1, 
+                                         vjust = 0.5))
+
+
+### Error bars ###
+
+# Calculate the mean engine size by class
+class_disp <- mpg_data %>% group_by(class) %>% 
+                           summarize(mean_disp = mean(displ),
+                                     sd_disp = sd(displ))
+
+# Point plot with error bars
+error1 <- ggplot(class_disp, aes(x = class, y = mean_disp))
+error1 + geom_point(size=4) + 
+         geom_errorbar(aes(ymin = mean_disp - sd_disp, 
+                           ymax = mean_disp + sd_disp)) +
+         labs(title = 'Engine Size by Vehicle Class', 
+              x = 'Class', y = 'Engine Size (L)')
+
+
+### Faceting ###
+
+# Gather MPG columns into the long format
+mpg_long <- mpg_data %>% gather(key = 'mpg_type', 
+                                value = 'mpg_rating', 
+                                c(cty, hwy))
+
+# Non-faceted box plot
+facet1 <- ggplot(mpg_long, aes(x = manufacturer, 
+                               y = mpg_rating, 
+                               color = mpg_type))
+facet1 + geom_boxplot() + 
+         labs(title = 'MPG by Manufacturer', 
+              x = 'Manufacturer', y = 'MPG', 
+              color = 'MPG Type') + 
+         theme(axis.text.x = element_text(angle = 45, 
+                                          hjust = 1))
+
+# Faceted box plot
+facet2 <- ggplot(mpg_long, aes(x = manufacturer, 
+                               y = mpg_rating, 
+                               color = mpg_type))
+f_labs <- c('cty' = 'City', 'hwy' = 'Highway') # facet labels
+facet2 + geom_boxplot() + 
+         facet_wrap(vars(mpg_type), 
+                    labeller = labeller(mpg_type = f_labs)) + 
+         labs(title = 'MPG by Manufacturer', 
+              x = 'Manufacturer', y = 'MPG') + 
+         theme(legend.position = 'none',
+               axis.text.x = element_text(angle = 90, 
                                          hjust = 1, 
                                          vjust = 0.5))
