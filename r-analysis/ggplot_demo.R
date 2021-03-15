@@ -45,3 +45,17 @@ line1 + geom_line() + ggtitle('Average MPG of Toyota Cars') +
         ylab('Average Fuel Economy (MPG)') + 
         scale_x_discrete(limits = c(4, 6, 8)) + 
         scale_y_continuous(breaks = 15:30)
+
+
+### Scatter plots ###
+
+# Scatter plot
+scatter1 <- ggplot(mpg_data, aes(x = displ, y = hwy, 
+                                 size = cty, color = class))
+scatter1 + geom_point(alpha = 0.8) + 
+           labs(title = 'MPG by Engine Size', 
+                x = 'Engine Size (L)', 
+                y = 'Highway Fuel Economy (MPG)', 
+                size = 'City MPG', 
+                color = 'Vehicle Class')
+
