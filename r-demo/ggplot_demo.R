@@ -32,7 +32,7 @@ bar2 + geom_col() + ggtitle('Average MPG by Manufacturer') +
 
 ### Distribution plots ###
 
-# Dist plot
+# Density plot
 ggplot(mpg_data, aes(x = hwy)) + 
   geom_density(color = 'red') + 
   labs(title = 'Highway MPG Distribution', 
