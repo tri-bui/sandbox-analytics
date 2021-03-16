@@ -7,13 +7,13 @@ library(tidyverse)
 library(jsonlite)
 
 # Read in CSV files
-demo_csv <- read.csv(file = 'demo/data/demo.csv',
+demo_csv <- read.csv(file = 'data/demo.csv',
                      stringsAsFactors = F)
-demo_wide <- read.csv(file = 'demo/data/demo2.csv',
+demo_wide <- read.csv(file = 'data/demo2.csv',
                      stringsAsFactors = F)
 
 # Read in JSON file
-demo_json <- fromJSON(txt = 'demo/data/demo.json')
+demo_json <- fromJSON(txt = 'data/demo.json')
 
 
 ### Transformations ###
