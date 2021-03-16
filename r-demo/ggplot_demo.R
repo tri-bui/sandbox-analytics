@@ -50,7 +50,7 @@ toyota_mpg <- mpg_data %>%
 # Line plot
 line1 <- ggplot(toyota_mpg, aes(x = cyl, y = mean_hwy))
 line1 + geom_line() + ggtitle('Average MPG of Toyota Cars') + 
-        xlab('Number of Cylinders') + 
+        xlab('Engine Type') + 
         ylab('Average Fuel Economy (MPG)') + 
         scale_x_discrete(limits = c(4, 6, 8)) + 
         scale_y_continuous(breaks = 15:30)
