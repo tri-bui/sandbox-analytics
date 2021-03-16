@@ -1,8 +1,8 @@
 ### Dependencies and Data ###
 
 # Libraries
+# install.packages('tidyverse')
 library(tidyverse)
-library(jsonlite)
 
 # Built-in mpg data
 mpg_data <- mpg
