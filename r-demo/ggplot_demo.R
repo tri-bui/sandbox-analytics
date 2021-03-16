@@ -30,6 +30,15 @@ bar2 + geom_col() + ggtitle('Average MPG by Manufacturer') +
                                         hjust = 1))
 
 
+### Distribution plots ###
+
+# Dist plot
+ggplot(mpg_data, aes(x = hwy)) + 
+  geom_density(color = 'red') + 
+  labs(title = 'Highway MPG Distribution', 
+       x = 'Highway Fuel Economy (MPG)', 
+       y = 'Density')
+
 ### Line plots ###
 
 # Calculate the mean mpg by cylinder count for Toyota cars
