@@ -79,7 +79,7 @@ s = '|' + (' ' * 2) # pipe + 2 spaces
 
 # Title and total votes
 heading = (
-    f'{h * 2}' + f'{s}Election Results\n' + f'{h}' # 2 lines + title + line
+    f'{h}' + f'{s}Election Results\n' + f'{h}' # line + title + line
     f'{s}Total votes: {total_votes:,}\n' + f'{h * 3}' # total votes + 3 lines
 )
 
