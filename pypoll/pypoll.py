@@ -73,37 +73,36 @@ for candi, votes in candi_cnts.items():
 
 """ Write Results to File """
 
-# Horizontal rules with newline pipes
-np = '\n|' # newline pipe
-hr = np + ('-' * 50) + np # 1 line
-hr2 = hr + hr[2:] # 2 lines
+# Horizontal rule and spaceswith pipes
+h = '|' + ('-' * 50) + '\n' # pipe + horizontal rule + newline
+s = '|' + (' ' * 2) # pipe + 2 spaces
 
 # Title and total votes
 heading = (
-    f'{hr2[1:]}\tElection Results{hr}'
-    f'\tTotal votes: {total_votes:,}{hr2}'
+    f'{h * 2}' + f'{s}Election Results\n' + f'{h}' # 2 lines + title + line
+    f'{s}Total votes: {total_votes:,}\n' + f'{h * 3}' # total votes + 3 lines
 )
 
 # Vote count for each county
-county_votes = f'{np}{hr2}\tCounties{hr}'
+county_votes = f'{s}Counties\n' + f'{h}' # county heading + line
 for county, votes in county_cnts.items():
-    county_votes += f'\t{county} County: {votes:,} votes ({county_pcts[county]:.2f}%){np}'
+    county_votes += f'{s}{county} County: {votes:,} votes ({county_pcts[county]:.2f}%)\n'
 
 # Largest county turnout
 largest_turnout = (
-    f'{hr[2:]}\tLargest Turnout: {largest} County{np}'
-    f'\tVotes: {county_most_votes:,} ({county_pcts[largest]:.2f}%){hr2}'
+    f'{h}' + f'{s}Largest Turnout: {largest} County\n' # line + largest county turnout
+    f'{s}Votes: {county_most_votes:,} ({county_pcts[largest]:.2f}%)\n' + f'{h * 3}' # vote count + 3 lines
 )
 
 # Vote count for each candidate
-candidate_votes = f'{np}{hr2}\tCandidates{hr}'
+candidate_votes = f'{s}Candidates\n' + f'{h}' # candidate heading + line
 for candi, votes in candi_cnts.items():
-    candidate_votes += f'\t{candi}: {votes:,} votes ({candi_pcts[candi]:.2f}%){np}'
+    candidate_votes += f'{s}{candi}: {votes:,} votes ({candi_pcts[candi]:.2f}%)\n'
 
 # Election winner
 election_winner = (
-    f'{hr[2:]}\tWinner: {winner}{np}'
-    f'\tVotes: {candi_most_votes:,} ({candi_pcts[winner]:.2f}%){hr2[:-1]}'
+    f'{h}' + f'{s}Winner: {winner}\n' # line + election winner
+    f'{s}Votes: {candi_most_votes:,} ({candi_pcts[winner]:.2f}%)\n' + f'{h * 2}' # vote count + 2 lines
 )
 
 
